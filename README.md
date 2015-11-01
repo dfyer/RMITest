@@ -1,27 +1,23 @@
 # RMI Example
 
+## Test Environment
+
+OS: Red Hat Enterprise Linux Server release 6.6 (Santiago)
+Compiler: javac 1.6.0_36
+
 ## How to Run
-Start the Java RMI Registry
 
-> rmiregistry (<port>)
+1. Compile java files
+> $ javac *.java
 
-Start the Server
+2. Start the Java RMI Registry
+> $ rmiregistry (<port>)
 
-> java -classpath <classDir> -Djava.rmi.server.codebase=file:<classDir>/ Server
+3. Start the Server
+> java -classpath *classDir* -Djava.rmi.server.codebase=file:*classDir*/ Server
 
-Run the Client
-
-> java -classpath <classDir> Client
-
-## Files
-### Remote Interface
-Reader.java
-
-### Server Implementation
-Server.java
-
-### Client Imlementation
-Client.java
+4. Run the Client
+> java -classpath *classDir* ReaderClient
 
 ## Reference
 
