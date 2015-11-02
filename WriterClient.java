@@ -11,6 +11,7 @@ public class WriterClient {
         // File location and port number with argument
         String traceLocation = (args.length < 1) ? "seq_trace.log" : args[0];
         String host = (args.length < 2) ? null : args[1];
+        //int clients = (args.length < 3) ? 1 : Integer.parseInt(args[2]);
 
         // Announcing the location of trace file and host address
         System.out.println("Trace File: " + traceLocation);
@@ -31,15 +32,16 @@ public class WriterClient {
             //////////////// CHECK CONNECTION END ////////////////
 
             //////////////// WRITE TEST BEGIN ////////////////
+            //stub.addClient();
+            //while(stub.countClient() != clients) {}
             // WRITE TEST: read the trace file line by line
             BufferedReader trace = new BufferedReader(new FileReader(traceLocation));
             String line;
 
             // XXX: Assuming datasize is always 1024
-            // XXX: Always creatnig data with fixed key
             // WRITE TEST: dummy string for write
             String randCharSet = "AEIOUaeiouVSTRBGDvstrbgc123789;][=+,.*!$";
-            String dummydata = "FFFF";
+            String dummydata = "";
             Random r = new Random();
             for (int i = 0; i < 1024; i++) {
                 dummydata += randCharSet.charAt(r.nextInt(randCharSet.length()));
@@ -55,10 +57,10 @@ public class WriterClient {
 
                 // WRITE TEST: if key is found, response is
                 //            <datasize>-sized byte array that are written ( = dummy data )
-                response = stub.writeRecord(key, datasize, dummydata);
+                boolean writeSuccessful = stub.writeRecord(key, datasize, dummydata);
 
                 // NOTE: checking the Result is commented due to print cost
-                if (response != null) {
+                if (writeSuccessful) {
                     count++;
                     //System.out.println("response for key " + key + ": " + response);
                 } else {
